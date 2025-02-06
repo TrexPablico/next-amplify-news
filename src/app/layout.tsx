@@ -30,7 +30,6 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      {" "}
       {/* Set the language attribute to English */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

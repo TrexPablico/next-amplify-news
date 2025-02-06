@@ -28,11 +28,14 @@ export const isAuthenticated = async () =>
         // Attempt to get the current authenticated user
         const user = await getCurrentUser(contextSpec);
 
-        // Return true if user is authenticated, false otherwise
+        if (!user) {
+          throw new Error("User not authenticated");
+        } // If user is not authenticated, do something
+
+        // Return true i f user is authenticated, false otherwise
         return !!user;
       } catch (error) {
         // Log any errors encountered during authentication check
-        console.error("Error getting current user", error);
 
         // Return false if an error occurs (user not authenticated)
         return false;

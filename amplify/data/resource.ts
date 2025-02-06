@@ -15,13 +15,11 @@ const schema = a.schema({
       id: a.id().required(),
       title: a.string().required(),
       description: a.string().required(),
-      date: a.date().required(),
-      image: a.string().required(),
-      admin: a.belongsTo("Admin", "posts"), //this is the relationship between the post and the admin
     })
     .authorization((allow) => [
       allow.guest().to(["read"]), // Assuming 'everyone' is the correct method
       allow.owner(),
+      allow.publicApiKey().to(["read"]),
     ]),
 });
 
@@ -31,6 +29,9 @@ export const data = defineData({
   schema,
   authorizationModes: {
     defaultAuthorizationMode: "iam",
+    apiKeyAuthorizationMode: {
+      expiresInDays: 30,
+    },
   },
 });
 
