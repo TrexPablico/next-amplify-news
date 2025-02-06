@@ -6,6 +6,7 @@ import { generateClient } from "aws-amplify/data";
 import { Amplify } from "aws-amplify";
 import outputs from "../../amplify_outputs.json";
 import { ApiKey } from "aws-cdk-lib/aws-apigateway";
+import Hero from "../components/Hero";
 
 Amplify.configure(outputs);
 
@@ -26,13 +27,13 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex min-h-screen flex-col items-center justify-between p-24 w-1/2 m-auto">
-        <h1 className="text-4xl pb-10">News</h1>
+      <div className="flex min-h-screen flex-col items-center justify-between p-6 w-1/2 m-auto">
+        <Hero />
+        <h1 className="text-4xl pb-1">News</h1>
         {posts.map((todo) => (
           <div key={todo.title}>
             <li>{todo.title}</li>
             <li>{todo.description}</li>
-            <h1>tapos na</h1>
           </div>
         ))}
       </div>
