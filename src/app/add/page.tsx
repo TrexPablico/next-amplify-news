@@ -24,6 +24,8 @@ const AddPost = () => {
     defaultValues: {
       title: "",
       description: "",
+      content: "",
+      imageUrl: "",
     },
   });
 
@@ -32,6 +34,10 @@ const AddPost = () => {
       const formData = new FormData();
       formData.append("title", data.title);
       formData.append("description", data.description);
+      formData.append("content", data.content);
+      if (data.imageUrl) {
+        formData.append("imageUrl", data.imageUrl);
+      }
       await createPost(formData);
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -43,7 +49,7 @@ const AddPost = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
-          className="space-y-8 m-auto"
+          className="space-y-8 m-auto w-[600px]"
         >
           <FormField
             control={form.control}
@@ -64,13 +70,43 @@ const AddPost = () => {
             name="description"
             render={({ field }: { field: any }) => (
               <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Input placeholder="Description" {...field} />
+                </FormControl>
+                <FormDescription>
+                  Enter the description of the post.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="content"
+            render={({ field }: { field: any }) => (
+              <FormItem>
                 <FormLabel>Content</FormLabel>
                 <FormControl>
                   <Input placeholder="Content" {...field} />
                 </FormControl>
                 <FormDescription>
-                  Enter the description of the post.
+                  Enter the content of the post.
                 </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="imageUrl"
+            render={({ field }: { field: any }) => (
+              <FormItem>
+                <FormLabel>Image URL</FormLabel>
+                <FormControl>
+                  <Input placeholder="Image URL" {...field} />
+                </FormControl>
+                <FormDescription>Enter the URL of the image.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
