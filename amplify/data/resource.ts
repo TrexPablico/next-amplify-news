@@ -15,7 +15,9 @@ const schema = a.schema({
       id: a.id().required(),
       title: a.string().required(),
       description: a.string().required(),
+      imageUrl: a.string(), // Add this line
     })
+
     .authorization((allow) => [
       allow.guest().to(["read"]), // Assuming 'everyone' is the correct method
       allow.owner(),
