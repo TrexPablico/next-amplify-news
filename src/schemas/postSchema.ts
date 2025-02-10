@@ -10,11 +10,12 @@ const postSchema = z.object({
   description: z
     .string()
     .min(1, { message: "Description is required" })
-    .max(100, { message: "Description cannot exceed 500 characters" }), // Example of adding a max length
+    .max(500, { message: "Description cannot exceed 500 characters" }),
+
   content: z
     .string()
-    .min(1, { message: "Description is required" })
-    .max(500, { message: "Description cannot exceed 500 characters" }), //
+    .min(1, { message: "Content is required" })
+    .max(10000, { message: "Content cannot exceed 10,000 characters" }), // Huge text input for content
 });
 
 export default postSchema;
