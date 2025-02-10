@@ -14,7 +14,6 @@ export default function NavBar({ isSignedIn }: { isSignedIn: boolean }) {
   const [authCheck, setAuthCheck] = useState(isSignedIn);
   const [dropdown, setDropdown] = useState(false);
   const [time, setTime] = useState("");
-  const [bannerVisible, setBannerVisible] = useState(true);
   console.log("isSignedIn", isSignedIn);
 
   // Initialize the router
@@ -112,7 +111,7 @@ export default function NavBar({ isSignedIn }: { isSignedIn: boolean }) {
           <Link href="/">
             <Image src="/img/hc.png" alt="Logo" width={80} height={80} />
           </Link>
-          <div className="hidden md:flex gap-7">
+          <div className="hidden md:flex gap-7 ">
             {routes.map((route) => (
               <Link key={route.href} href={route.href}>
                 {route.label}
