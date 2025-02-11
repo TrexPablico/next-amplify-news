@@ -1,5 +1,5 @@
 "use client"; // Add this directive at the top
-import * as z from "zod";
+
 import { useForm, FieldValues } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import postSchema from "@/schemas/postSchema";
