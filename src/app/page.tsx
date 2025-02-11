@@ -17,18 +17,21 @@ const client = generateClient<Schema>({ authMode: "apiKey" });
 export default function Home() {
   const [posts, setPost] = useState<Array<Schema["Post"]["type"]>>([]);
   const [visibleCount, setVisibleCount] = useState(3); // Number of items to display initially
+  const [isSignedIn, setIsSignedIn] = useState(false); // Replace with actual authentication check
 
   function listTodos() {
     client.models.Post.observeQuery().subscribe({
       next: (data) => {
         console.log("Received data:", data.items);
-        setPost([...data.items]);
+        setPost(data.items);
       },
     });
   }
 
   useEffect(() => {
     listTodos();
+    // Replace with actual authentication check
+    setIsSignedIn(true); // Set to true for demonstration purposes
   }, []);
 
   const handleLoadMore = () => {
@@ -40,6 +43,15 @@ export default function Home() {
     console.log(`Card clicked: ${id}`);
   };
 
+  const handleDelete = async (id: string) => {
+    try {
+      await client.models.Post.delete({ id });
+      setPost((prevPosts) => prevPosts.filter((post) => post.id !== id));
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
+
   return (
     <>
       <div className="flex min-h-screen flex-col items-center justify-between p-6 w-3/4 m-auto">
@@ -47,10 +59,21 @@ export default function Home() {
         <div className="news-card grid gap-6 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:mt-[-1px] mt-[-600px]">
           {posts.slice(0, visibleCount).map((todo) => (
             <div
-              key={todo.title}
-              className="news-item bg-white rounded-lg shadow-md p-4 mb-4 cursor-pointer"
+              key={todo.id} // Use the unique id as the key
+              className="news-item bg-white rounded-lg shadow-md p-4 mb-4 cursor-pointer relative"
               onClick={() => handleCardClick(todo.id)}
             >
+              {isSignedIn && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDelete(todo.id);
+                  }}
+                  className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1"
+                >
+                  X
+                </button>
+              )}
               <Image
                 src="/img/sample.jpg" // Use the default image path
                 alt={todo.title}
