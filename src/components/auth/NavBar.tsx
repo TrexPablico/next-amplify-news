@@ -106,6 +106,7 @@ export default function NavBar({ isSignedIn }: { isSignedIn: boolean }) {
         justifyContent="space-between"
         alignItems="center"
         padding="1rem"
+        style={{ backgroundColor: "rgba(211, 211, 211, 0.6)" }} // Light grey background with opacity
       >
         <Flex as="nav" alignItems="center" gap="2rem" margin="0 2rem">
           <Link href="/">
@@ -113,7 +114,11 @@ export default function NavBar({ isSignedIn }: { isSignedIn: boolean }) {
           </Link>
           <div className="hidden md:flex gap-7 ">
             {routes.map((route) => (
-              <Link key={route.href} href={route.href}>
+              <Link
+                key={route.href}
+                href={route.href}
+                className="hover:underline"
+              >
                 {route.label}
               </Link>
             ))}
@@ -142,7 +147,11 @@ export default function NavBar({ isSignedIn }: { isSignedIn: boolean }) {
         <div className="md:hidden">
           <nav className="flex flex-col items-center gap-2 mt-2">
             {routes.map((route) => (
-              <Link key={route.href} href={route.href}>
+              <Link
+                key={route.href}
+                href={route.href}
+                className="hover:underline"
+              >
                 {route.label}
               </Link>
             ))}
