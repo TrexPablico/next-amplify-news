@@ -7,7 +7,7 @@ import { Amplify } from "aws-amplify";
 import outputs from "../../amplify_outputs.json";
 import Hero from "../components/Hero";
 import Image from "next/image";
-import Contact from "@/components/contact";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 Amplify.configure(outputs);
