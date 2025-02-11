@@ -19,7 +19,7 @@ const schema = a.schema({
 
     .authorization((allow) => [
       allow.guest().to(["read"]), // Assuming 'everyone' is the correct method
-      allow.owner(),
+      allow.owner().to(["read", "create", "delete"]),
       allow.publicApiKey().to(["read"]),
     ]),
 });
