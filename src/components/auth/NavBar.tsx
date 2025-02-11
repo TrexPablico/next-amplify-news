@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/prefer-as-const */
+
 // Import necessary modules and components
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
