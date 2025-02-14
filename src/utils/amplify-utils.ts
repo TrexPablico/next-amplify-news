@@ -34,6 +34,7 @@ export const isAuthenticated = async () =>
 
         // Return true i f user is authenticated, false otherwise
         return !!user;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         // Log any errors encountered during authentication check
         // Return false if an error occurs (user not authenticated)
