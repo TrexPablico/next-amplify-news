@@ -36,7 +36,6 @@ export const isAuthenticated = async () =>
         return !!user;
       } catch (error) {
         // Log any errors encountered during authentication check
-        console.error("Error during authentication check:", error);
         // Return false if an error occurs (user not authenticated)
         return false;
       }

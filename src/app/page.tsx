@@ -1,19 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Schema } from "../../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
 import { Amplify } from "aws-amplify";
-import outputs from "../../amplify_outputs.json";
+import { generateClient } from "aws-amplify/data";
+import awsconfig from "../../amplify_outputs.json";
+
+Amplify.configure(awsconfig);
+import type { Schema } from "../../amplify/data/resource";
 import Hero from "../components/Hero";
 import Image from "next/image";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-Amplify.configure(outputs);
-
-const client = generateClient<Schema>({ authMode: "apiKey" });
-
+const client = generateClient<Schema>();
+console.log("Client:", client);
 export default function Home() {
   const [posts, setPost] = useState<Array<Schema["Post"]["type"]>>([]);
   const [visibleCount, setVisibleCount] = useState(3); // Number of items to display initially
